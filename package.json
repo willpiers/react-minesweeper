@@ -1,0 +1,19 @@
+{
+  "name": "minesweeper",
+  "version": "0.0.0",
+  "description": "React Minesweeper game",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git"
+  },
+  "keywords": [
+    "react"
+  ],
+  "author": "willpiers",
+  "license": "Do What The Fuck You Want"
+}

@@ -1,0 +1,18 @@
+table {
+	border-spacing: 0px;
+}
+td {
+	text-align: center;
+}
+td.unclicked {
+	border: 2px outset lightgray;
+	padding: 10px;
+	background: #ddd;
+}
+td.clicked {
+	border: 2px inset lightgray;
+	background: #eee;
+	padding: 0px;
+	width: 20px;
+	height: 20px;
+}

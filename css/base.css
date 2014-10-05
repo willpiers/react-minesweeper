@@ -16,3 +16,8 @@ td.clicked {
 	width: 20px;
 	height: 20px;
 }
+td.bomb {
+	background-image: url('../images/mini-mine.png');
+	background-position: center;
+	background-repeat: no-repeat;
+}

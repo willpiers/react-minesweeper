@@ -35,7 +35,8 @@ var Board = React.createClass({
     })
   },
   bombClicked: function() {
-    alert('loser');
+    // alert('loser');
+    // reset game?
   },
   addBombCounts: function() {
     var rows = this.props.rows;
@@ -71,7 +72,7 @@ var Board = React.createClass({
 function gimmeCells(size) {
   var me = this;
   return _.map(_.range(0, size), function(n) {
-      return {isBomb: Math.random() <= 0.33};
+      return {isBomb: Math.random() <= 0.3};
   });
 }
 function gimmeRows(size) {

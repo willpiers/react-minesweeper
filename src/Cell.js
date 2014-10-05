@@ -11,17 +11,36 @@ var Cell = React.createClass({
     }
   },
   render: function() {
-    if (this.state.isClicked) {
-      return <td className='clicked'>{this.getClickedMarkup()}</td>;
-    } else {
-      return <td onClick={this.clicked} className="unclicked">{this.getUnclickedMarkup()}</td>;
-    }
+    var classes = React.addons.classSet({
+      bomb: this.props.isBomb && this.state.isClicked,
+      clicked: this.state.isClicked,
+      unclicked: !this.state.isClicked
+    });
+    return this.state.isClicked ?
+      <td className={classes}>{this.getClickedMarkup()}</td> :
+      <td className={classes} onClick={this.clicked}>{this.getUnclickedMarkup()}</td>;
   },
   getUnclickedMarkup: function() {
     return <span></span>;
   },
   getClickedMarkup: function() {
-    return <span>{this.props.isBomb ? 'B' : this.props.bombCount}</span>;
+    var count = this.props.bombCount;
+    var i = !this.props.isBomb;
+    var color = React.addons.classSet({
+      blue: count == 1 && i,
+      green: count == 2 && i,
+      red: count == 3 && i,
+      purple: count == 4 && i,
+      maroon: count == 5 && i,
+      cyan: count == 6 && i,
+      black: count == 7 && i,
+      gray: count == 8 && i
+    });
+    return (
+      <span style={{color: color}}>
+        {this.props.isBomb ? ' ' : (count == 0 ? ' ' : count)}
+      </span>
+    );
   },
 
   clicked: function() {

@@ -42,10 +42,21 @@ var Cell = React.createClass({
       </span>
     );
   },
-
   clicked: function() {
+    var callback = function() {
+      if (this.isClickedZero()) {
+        var row = this.props.location.row;
+        var column = this.props.location.col;
+        this.props.zeroClicked(row, column);
+      }
+    };
     this.setState({
       isClicked: true
-    });
+    }, callback);
+  },
+  isClickedZero: function() {
+    return this.state.isClicked
+      && this.props.bombCount == 0
+      && !this.props.isBomb
   }
 });

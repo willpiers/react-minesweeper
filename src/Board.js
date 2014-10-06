@@ -2,7 +2,8 @@
 
 var Board = React.createClass({
   componentWillMount: function() {
-    this.addBombCounts(this.props.rows)
+    this.addBombCounts();
+    this.addLocations();
   },
   render: function() {
     return (
@@ -22,7 +23,9 @@ var Board = React.createClass({
   getCellComponent: function(info) {
     return <Cell isBomb={info.isBomb}
                  bombCount={info.bombCount}
-                 bombClicked={this.bombClicked} />;
+                 location={info.location}
+                 bombClicked={this.bombClicked}
+                 zeroClicked={this.zeroClicked} />;
   },
   getRows: function() {
     var me = this;
@@ -34,23 +37,41 @@ var Board = React.createClass({
       );
     })
   },
-  bombClicked: function() {
-    // alert('loser');
-    // reset game?
+  bombClicked: _.noop,
+  zeroClicked: function(row, col) {
+    console.log(row, col);
+  },
+  eachCell: function(fn) {
+    _.each(this.props.rows, function(row, i) {
+      _.each(row, function(cell, j) {
+        fn(cell, i, j);
+      });
+    });
   },
   addBombCounts: function() {
-    var rows = this.props.rows;
     var me = this;
-    _.each(rows, function(row, i) {
-      _.each(row, function(cell, j) {
-        var bombs = _.reduce(me.validNeighborLocations(i,j), function(sum, location) {
-          return sum + (rows[location.row][location.col].isBomb ? 1 : 0)
-        }, 0);
-        return _.assign(cell, {bombCount: bombs});
-      })
+    var rows = me.props.rows;
+    me.eachCell(function(cell, i, j) {
+      var bombs = _.reduce(me.neighbors(i,j), function(sum, spot) {
+        return sum + (rows[spot.row][spot.col].isBomb ? 1 : 0)
+      }, 0);
+      _.assign(cell, {bombCount: bombs});
+    });
+  },
+  addLocations: function() {
+    this.eachCell(function(cell, i, j) {
+      _.assign(
+        cell,
+        {
+          location: {
+            row: i,
+            col: j
+          }
+        }
+      );
     })
   },
-  validNeighborLocations: function(i,j) {
+  neighbors: function(i,j) {
     var me = this;
     return _.reject([
       {row: i-1, col: j-1},
@@ -68,6 +89,8 @@ var Board = React.createClass({
     });
   }
 });
+
+
 
 function gimmeCells(size) {
   var me = this;

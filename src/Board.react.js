@@ -94,20 +94,4 @@ var Board = React.createClass({
   }
 });
 
-function gimmeCells(size) {
-  return _.map(_.range(0, size), function(n) {
-      return {isBomb: Math.random() <= 0.25};
-  });
-}
-function gimmeRows(size) {
-  return _.times(size, function(n) {
-    return gimmeCells(size);
-  })
-}
-debugger;
-React.renderComponent(
-  <Board rows={gimmeRows(10)} />,
-  document.getElementById('minesweeper')
-);
-
 module.exports = Board;

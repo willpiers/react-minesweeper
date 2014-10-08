@@ -1,7 +1,6 @@
 // var ExtractTextPlugin = require("extract-text-webpack-plugin");
 module.exports = {
-  context: __dirname,
-  entry: "./src/Board.react.js",
+  entry: "./index.js",
   output: {
     path: __dirname + "/dist",
     filename: "bundle.js"
@@ -11,12 +10,10 @@ module.exports = {
       {
         test: /\.react.js$/,
         loader: 'jsx-loader',
-        devLoader: 'react-hot!jsx-loader'
       },
       {
         test: /\.js$/,
         loader: 'jsx-loader',
-        devLoader: 'react-hot!jsx-loader'
       },
       {
       	test: /\.css$/,

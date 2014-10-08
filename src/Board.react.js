@@ -1,4 +1,8 @@
 /** @jsx React.DOM */
+var _ = require('lodash');
+var React = require('react/addons');
+var Cell = require('./Cell.react');
+require('./style/base.css');
 
 var Board = React.createClass({
   componentWillMount: function() {
@@ -90,22 +94,20 @@ var Board = React.createClass({
   }
 });
 
-
-
 function gimmeCells(size) {
-  var me = this;
   return _.map(_.range(0, size), function(n) {
-      return {isBomb: Math.random() <= 0.3};
+      return {isBomb: Math.random() <= 0.25};
   });
 }
 function gimmeRows(size) {
-  var me = this;
   return _.times(size, function(n) {
-    return me.gimmeCells(size);
+    return gimmeCells(size);
   })
 }
-
+debugger;
 React.renderComponent(
   <Board rows={gimmeRows(10)} />,
   document.getElementById('minesweeper')
 );
+
+module.exports = Board;

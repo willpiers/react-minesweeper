@@ -1,4 +1,6 @@
 /** @jsx React.DOM */
+var React = require('react');
+
 var Cell = React.createClass({
   getInitialState: function() {
     return {
@@ -60,3 +62,5 @@ var Cell = React.createClass({
       && !this.props.isBomb
   }
 });
+
+module.exports = Cell;

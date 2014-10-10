@@ -21,7 +21,7 @@ td.clicked span {
 	font-weight: bold;
 }
 td.bomb {
-	background-image: url('../images/mini-mine.png');
+	background-image: url('../images/mine.gif');
 	background-position: center;
 	background-repeat: no-repeat;
 }

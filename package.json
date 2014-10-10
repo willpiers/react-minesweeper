@@ -3,9 +3,20 @@
   "version": "0.0.0",
   "description": "React Minesweeper game",
   "dependencies": {
+    "lodash": "^2.4.1",
+    "react": "^0.11.2"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "css-loader": "^0.9.0",
+    "file-loader": "^0.7.2",
+    "jsx-loader": "^0.11.2",
+    "style-loader": "^0.8.1",
+    "url-loader": "^0.5.5",
+    "webpack": "^1.4.5",
+    "webpack-dev-server": "^1.6.5"
+  },
   "scripts": {
+    "start": "webpack --progress --colors --watch",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

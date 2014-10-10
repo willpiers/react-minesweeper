@@ -2,7 +2,6 @@
 var _ = require('lodash');
 var React = require('react/addons');
 var Cell = require('./Cell.react');
-require('./style/base.css');
 
 var Board = React.createClass({
   componentWillMount: function() {

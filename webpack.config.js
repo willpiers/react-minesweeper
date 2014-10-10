@@ -20,8 +20,8 @@ module.exports = {
       	loader: 'style-loader!css-loader'
       },
       {
-        test: /\.png$/,
-        loader: 'url-loader'
+        test: /\.gif$/,
+        loader: 'url-loader?limit=100000&mimetype=image/gif'
       }
     ]
   }

@@ -1,6 +1,8 @@
 /** @jsx React.DOM */
 var React = require('react');
 var Board = require('./src/Board.react');
+require('./src/style/base.css');
+
 
 function gimmeCells(size) {
   return _.map(_.range(0, size), function(n) {

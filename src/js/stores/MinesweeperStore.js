@@ -4,25 +4,35 @@ var merge = require('react/lib/merge');
 var EventEmitter = require('events').EventEmitter;
 var CHANGE_EVENT = 'change';
 
-localStorage.cells = [];
+var _rows = [];
 
 var MinesweeperStore = merge(EventEmitter.prototype, {
   emitChange: function() {
     this.emit(CHANGE_EVENT);
   },
+  receiveRows: function(rows) {
+    _rows = rows;
+    this.emitChange();
+  },
+  getState: function() {
+    return {
+      rows: _rows
+    }
+  },
+  addChangeListener: function(callback) {
+    this.on(CHANGE_EVENT, callback);
+  },
 
-  openCell: function(info) {
-    console.log('row', info.row);
-    console.log('col', info.col);
+  removeChangeListener: function(callback) {
+    this.removeListener(CHANGE_EVENT, callback);
   }
 });
 
 MinesweeperStore.dispatchToken = MinesweeperDispatcher.register(function(payload) {
   var action = payload.action;
   switch(action.type) {
-
-    case ActionTypes.RECEIVE_CLICK:
-      MinesweeperStore.openCell(action.cellInfo);
+    case ActionTypes.RECEIVE_ROWS:
+      MinesweeperStore.receiveRows(action.rows);
       break;
 
     default:

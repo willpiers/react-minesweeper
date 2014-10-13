@@ -2,25 +2,15 @@
 var React = require('react');
 
 var Cell = React.createClass({
-  getInitialState: function() {
-    return {
-      isClicked: false
-    };
-  },
-  componentDidUpdate: function() {
-    if (this.props.isBomb && this.state.isClicked) {
-      this.props.bombClicked();
-    }
-  },
   render: function() {
     var classes = React.addons.classSet({
-      bomb: this.props.isBomb && this.state.isClicked,
-      clicked: this.state.isClicked,
-      unclicked: !this.state.isClicked
+      bomb: this.props.isBomb && this.props.isClicked,
+      clicked: this.props.isClicked,
+      unclicked: !this.props.isClicked
     });
-    return this.state.isClicked ?
+    return this.props.isClicked ?
       <td className={classes}>{this.getClickedMarkup()}</td> :
-      <td className={classes} onClick={this.clicked}>{this.getUnclickedMarkup()}</td>;
+      <td className={classes} onClick={this.propagateClick}>{this.getUnclickedMarkup()}</td>;
   },
   getUnclickedMarkup: function() {
     return <span></span>;
@@ -44,22 +34,8 @@ var Cell = React.createClass({
       </span>
     );
   },
-  clicked: function() {
-    var callback = function() {
-      if (this.isClickedZero()) {
-        var row = this.props.location.row;
-        var column = this.props.location.col;
-        this.props.zeroClicked(row, column);
-      }
-    };
-    this.setState({
-      isClicked: true
-    }, callback);
-  },
-  isClickedZero: function() {
-    return this.state.isClicked
-      && this.props.bombCount == 0
-      && !this.props.isBomb
+  propagateClick: function() {
+    this.props.onOpen(this.props.location);
   }
 });
 

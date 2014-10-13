@@ -5,11 +5,10 @@ var MinesweeperAPI = require('../apis/MinesweeperAPI');
 var ActionTypes = MinesweeperConstants.ActionTypes;
 
 module.exports = {
-  receiveClick: function(location) {
-    MinesweeperDispatcher.handleViewAction({
-      type: ActionTypes.RECEIVE_CLICK,
-      location: location
+  receiveRows: function(rows) {
+    MinesweeperDispatcher.handleServerAction({
+      type: ActionTypes.RECEIVE_ROWS,
+      rows: rows
     });
-    MinesweeperAPI.openCell(location);
   }
 };

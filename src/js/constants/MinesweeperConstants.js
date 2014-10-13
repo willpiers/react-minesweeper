@@ -4,11 +4,11 @@ module.exports = {
 
     // View actions
 
-    RECEIVE_CLICK: 'RECEIVE_CLICK'
+    RECEIVE_CLICK: 'RECEIVE_CLICK',
     
     // Server actions
 
-    // RECEIVE_WORKSPACES: 'RECEIVE_WORKSPACES'
+    RECEIVE_ROWS: 'RECEIVE_ROWS'
   },
 
   PayloadSources: {

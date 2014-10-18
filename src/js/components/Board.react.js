@@ -15,6 +15,12 @@ var Board = React.createClass({
     MinesweeperStore.addChangeListener(this._onChange, this);
   },
   render: function() {
+    var me = this;
+    setTimeout(function() {
+      if (me.gameOver()) {
+        alert('you win');
+      }
+    }, 1)
     return (
       <div>
         <h3 onClick={this.reset}>Minesweeper</h3>
@@ -25,6 +31,13 @@ var Board = React.createClass({
         </table>
       </div>
     );
+  },
+  gameOver: function() {
+    return _.all(this.state.rows, function(row) {
+      return _.all(row, function(cell) {
+        return cell.isClicked || cell.isBomb
+      });
+    });
   },
   getRows: function() {
     var me = this;
@@ -45,8 +58,10 @@ var Board = React.createClass({
   getCellComponent: function(info) {
     return <Cell isBomb={info.isBomb}
                  isClicked={info.isClicked}
+                 isFlagged={info.isFlagged}
                  bombCount={info.bombCount}
-                 location={info.location} 
+                 location={info.location}
+                 onRightClick={this.cellRightClicked}
                  onOpen={this.cellClicked} />;
   },
   _onChange: function() {
@@ -56,6 +71,9 @@ var Board = React.createClass({
   },
   cellClicked: function(location) {
     CellActionCreators.receiveClick(location);
+  },
+  cellRightClicked: function(location) {
+    CellActionCreators.receiveRightClick(location);
   },
   reset: function() {
     console.log('reset...');

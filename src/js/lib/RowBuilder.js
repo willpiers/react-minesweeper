@@ -4,7 +4,7 @@ var Utils = require('./Utils.js');
 function gimmeCells(size) {
   return _.map(_.range(0, size), function(n) {
       return {
-        isBomb: Math.random() <= 0.25
+        isBomb: Math.random() <= 0.20
       };
   });
 };
@@ -24,7 +24,8 @@ function addInfo(rows) {
         col: j
       },
       bombCount: bombs,
-      isClicked: false
+      isClicked: false,
+      isFlagged: false
     })
   });
 };

@@ -25,3 +25,6 @@ td.bomb {
 	background-position: center;
 	background-repeat: no-repeat;
 }
+td.flagged {
+	background-color: yellow;
+}

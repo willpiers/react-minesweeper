@@ -7,8 +7,18 @@ module.exports = {
     var rows = this.getRows();
     var cell = rows[location.row][location.col];
     cell.isClicked = true;
+    cell.isFlagged = false;
 
     this.clickNeighbors(rows, cell);
+
+    this.setRows(rows);
+    CellServerActionCreators.receiveRows(rows);
+  },
+
+  toggleFlagged: function(location) {
+    var rows = this.getRows();
+    var cell = rows[location.row][location.col];
+    cell.isFlagged = !cell.isFlagged;
 
     this.setRows(rows);
     CellServerActionCreators.receiveRows(rows);
@@ -23,9 +33,10 @@ module.exports = {
     _.each(neighboringCells, function(neighbor) {
       if (neighbor != cell &&
           !neighbor.isClicked &&
-          !neighbor.isBomb && 
+          !neighbor.isBomb &&
           cell.bombCount == 0) {
         neighbor.isClicked = true;
+        neighbor.isFlagged = false;
         me.clickNeighbors(rows, neighbor);
       }
     })

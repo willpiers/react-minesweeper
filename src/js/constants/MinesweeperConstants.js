@@ -5,7 +5,8 @@ module.exports = {
     // View actions
 
     RECEIVE_CLICK: 'RECEIVE_CLICK',
-    
+    RECEIVE_RIGHT_CLICK: 'RECEIVE_RIGHT_CLICK',
+
     // Server actions
 
     RECEIVE_ROWS: 'RECEIVE_ROWS'

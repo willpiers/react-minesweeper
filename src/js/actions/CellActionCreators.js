@@ -11,5 +11,13 @@ module.exports = {
       location: location
     });
     MinesweeperAPI.openCell(location);
+  },
+
+  receiveRightClick: function(location) {
+  	MinesweeperDispatcher.handleViewAction({
+  	  type: ActionTypes.RECEIVE_RIGHT_CLICK,
+  	  location: location
+  	});
+  	MinesweeperAPI.toggleFlagged(location);
   }
 };

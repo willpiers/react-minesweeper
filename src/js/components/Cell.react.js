@@ -6,11 +6,15 @@ var Cell = React.createClass({
     var classes = React.addons.classSet({
       bomb: this.props.isBomb && this.props.isClicked,
       clicked: this.props.isClicked,
-      unclicked: !this.props.isClicked
+      unclicked: !this.props.isClicked,
+      flagged: this.props.isFlagged
     });
     return this.props.isClicked ?
       <td className={classes}>{this.getClickedMarkup()}</td> :
-      <td className={classes} onClick={this.propagateClick}>{this.getUnclickedMarkup()}</td>;
+      <td className={classes} onClick={this.propagateClick}
+                              onContextMenu={this.propagateRightClick}>
+          {this.getUnclickedMarkup()}
+      </td>;
   },
   getUnclickedMarkup: function() {
     return <span></span>;
@@ -34,8 +38,14 @@ var Cell = React.createClass({
       </span>
     );
   },
-  propagateClick: function() {
-    this.props.onOpen(this.props.location);
+  propagateClick: function(e) {
+    if (!this.props.isFlagged) {
+      this.props.onOpen(this.props.location);
+    }
+  },
+  propagateRightClick: function(e) {
+    e.preventDefault();
+    this.props.onRightClick(this.props.location)
   }
 });
 

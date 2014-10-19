@@ -1,20 +1,33 @@
-table {
-	border-spacing: 0px;
-}
-td {
+#minesweeper {
 	text-align: center;
 }
+h3 {
+	font-family: monospace;
+	font-weight: 200;
+	font-size: 20px;
+}
+table {
+	border-spacing: 3px;
+	margin: auto;
+}
+td {
+	box-sizing: border-box;
+	border-radius: 5px;
+	width: 30px;
+	height: 30px;
+}
 td.unclicked {
-	border: 2px outset lightgray;
+	border: 2px solid #bbb;
 	padding: 10px;
 	background: #ddd;
 }
+td.unclicked:hover {
+	border: 2px solid #888;
+}
 td.clicked {
-	border: 2px inset lightgray;
+	/*border: 2px solid lightgray;*/
 	background: #eee;
 	padding: 0px;
-	width: 20px;
-	height: 20px;
 }
 td.clicked span {
 	font-family: 'courier';
@@ -26,5 +39,5 @@ td.bomb {
 	background-repeat: no-repeat;
 }
 td.flagged {
-	background-color: yellow;
+	background-color: red;
 }

@@ -1,6 +1,7 @@
 var _ = require('lodash');
-var CellServerActionCreators = require('../actions/CellServerActionCreators');
+var BoardServerActionCreators = require('../actions/BoardServerActionCreators');
 var Utils = require('../lib/Utils');
+var RowBuilder = require('../lib/RowBuilder');
 
 module.exports = {
   openCell: function(location) {
@@ -12,7 +13,7 @@ module.exports = {
     this.clickNeighbors(rows, cell);
 
     this.setRows(rows);
-    CellServerActionCreators.receiveRows(rows);
+    BoardServerActionCreators.receiveRows(rows);
   },
 
   toggleFlagged: function(location) {
@@ -21,7 +22,7 @@ module.exports = {
     cell.isFlagged = !cell.isFlagged;
 
     this.setRows(rows);
-    CellServerActionCreators.receiveRows(rows);
+    BoardServerActionCreators.receiveRows(rows);
   },
 
   clickNeighbors: function(rows, cell) {
@@ -45,6 +46,7 @@ module.exports = {
   getRows: function() {
     return JSON.parse(localStorage.getItem('rows'));
   },
+
   setRows: function(rows) {
     localStorage.setItem('rows', JSON.stringify(rows));
   }

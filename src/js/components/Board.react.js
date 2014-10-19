@@ -2,7 +2,9 @@
 var _ = require('lodash');
 var React = require('react/addons');
 var Cell = require('./Cell.react');
+var Timer = require('./Timer.react');
 var CellActionCreators = require('../actions/CellActionCreators');
+var BoardActionCreators = require('../actions/BoardActionCreators');
 var MinesweeperStore = require('../stores/MinesweeperStore');
 
 var Board = React.createClass({
@@ -24,6 +26,7 @@ var Board = React.createClass({
     return (
       <div>
         <h3 onClick={this.reset}>Minesweeper</h3>
+        <Timer />
         <table>
           <tbody>
             {this.getRows()}
@@ -77,6 +80,7 @@ var Board = React.createClass({
   },
   reset: function() {
     console.log('reset...');
+    BoardActionCreators.receiveReset(this.state.rows.length);
   }
 });
 

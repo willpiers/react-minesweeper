@@ -43,6 +43,12 @@ module.exports = {
     })
   },
 
+  resetRows: function(size) {
+    var newRows = RowBuilder(size);
+    this.setRows(newRows);
+    BoardServerActionCreators.receiveRows(newRows);
+  },
+
   getRows: function() {
     return JSON.parse(localStorage.getItem('rows'));
   },

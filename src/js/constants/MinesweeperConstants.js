@@ -6,6 +6,7 @@ module.exports = {
 
     RECEIVE_CLICK: 'RECEIVE_CLICK',
     RECEIVE_RIGHT_CLICK: 'RECEIVE_RIGHT_CLICK',
+    RECEIVE_BOARD_RESET: 'RECEIVE_BOARD_RESET',
 
     // Server actions
 

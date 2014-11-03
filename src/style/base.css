@@ -41,3 +41,9 @@ td.bomb {
 td.flagged {
 	background-color: red;
 }
+.game-lost {
+	color: red;
+}
+.game-won {
+	color: green;
+}

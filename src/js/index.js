@@ -7,7 +7,7 @@ var MinesweeperAPI = require('./apis/MinesweeperAPI');
 require('../style/base.css');
 
 if (!MinesweeperAPI.getRows()) {
-	MinesweeperAPI.setRows(RowBuilder(12));
+	MinesweeperAPI.setRows(RowBuilder(4));
 }
 
 React.renderComponent(

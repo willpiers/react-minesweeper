@@ -17,16 +17,13 @@ var Board = React.createClass({
     MinesweeperStore.addChangeListener(this._onChange, this);
   },
   render: function() {
-    var me = this;
-    setTimeout(function() {
-      if (me.gameOver()) {
-        alert('you win');
-      }
-    }, 1)
+    var classes = React.addons.classSet({
+      'game-lost': this.isLost(),
+      'game-won': this.isWon()
+    });
     return (
       <div>
-        <h3 onClick={this.reset}>Minesweeper</h3>
-        <Timer />
+        <h3 onClick={this.reset} className={classes}>Minesweeper</h3>
         <table>
           <tbody>
             {this.getRows()}
@@ -39,6 +36,20 @@ var Board = React.createClass({
     return _.all(this.state.rows, function(row) {
       return _.all(row, function(cell) {
         return cell.isClicked || cell.isBomb
+      });
+    });
+  },
+  isWon: function() {
+    return _.all(this.state.rows, function(row) {
+      return _.all(row, function(cell) {
+        return (cell.isBomb && !cell.isClicked) || (!cell.isBomb && cell.isClicked)
+      });
+    });
+  },
+  isLost: function() {
+    return _.any(this.state.rows, function(row) {
+      return _.any(row, function(cell) {
+        return cell.isClicked && cell.isBomb
       });
     });
   },

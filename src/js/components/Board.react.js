@@ -10,7 +10,9 @@ var MinesweeperStore = require('../stores/MinesweeperStore');
 var Board = React.createClass({
   getInitialState: function() {
     return {
-      rows: this.props.rows
+      rows: this.props.rows,
+      isLost: this.props.isLost,
+      isWon: this.props.isWon
     };
   },
   componentDidMount: function() {
@@ -18,8 +20,8 @@ var Board = React.createClass({
   },
   render: function() {
     var classes = React.addons.classSet({
-      'game-lost': this.isLost(),
-      'game-won': this.isWon()
+      'game-lost': this.state.isLost,
+      'game-won': this.state.isWon
     });
     return (
       <div>
@@ -31,27 +33,6 @@ var Board = React.createClass({
         </table>
       </div>
     );
-  },
-  gameOver: function() {
-    return _.all(this.state.rows, function(row) {
-      return _.all(row, function(cell) {
-        return cell.isClicked || cell.isBomb
-      });
-    });
-  },
-  isWon: function() {
-    return _.all(this.state.rows, function(row) {
-      return _.all(row, function(cell) {
-        return (cell.isBomb && !cell.isClicked) || (!cell.isBomb && cell.isClicked)
-      });
-    });
-  },
-  isLost: function() {
-    return _.any(this.state.rows, function(row) {
-      return _.any(row, function(cell) {
-        return cell.isClicked && cell.isBomb
-      });
-    });
   },
   getRows: function() {
     var me = this;
@@ -79,8 +60,11 @@ var Board = React.createClass({
                  onOpen={this.cellClicked} />;
   },
   _onChange: function() {
+    var state = MinesweeperStore.getState()
     this.setState({
-      rows: MinesweeperStore.getState().rows
+      rows: state.rows,
+      isLost: state.isLost,
+      isWon: state.isWon
     });
   },
   cellClicked: function(location) {
@@ -90,7 +74,6 @@ var Board = React.createClass({
     CellActionCreators.receiveRightClick(location);
   },
   reset: function() {
-    console.log('reset...');
     BoardActionCreators.receiveReset(this.state.rows.length);
   }
 });

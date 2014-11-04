@@ -6,6 +6,21 @@ var CHANGE_EVENT = 'change';
 
 var _rows = [];
 
+function isLost(rows) {
+  return _.any(rows, function(row) {
+    return _.any(row, function(cell) {
+      return cell.isClicked && cell.isBomb
+    });
+  });
+}
+function isWon(rows) {
+  return _.all(rows, function(row) {
+    return _.all(row, function(cell) {
+      return (cell.isBomb && !cell.isClicked) || (!cell.isBomb && cell.isClicked)
+    });
+  });
+}
+
 var MinesweeperStore = merge(EventEmitter.prototype, {
   emitChange: function() {
     this.emit(CHANGE_EVENT);
@@ -16,7 +31,9 @@ var MinesweeperStore = merge(EventEmitter.prototype, {
   },
   getState: function() {
     return {
-      rows: _rows
+      rows: _rows,
+      isWon: isWon(_rows),
+      isLost: isLost(_rows)
     }
   },
   addChangeListener: function(callback) {

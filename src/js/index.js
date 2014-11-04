@@ -6,11 +6,14 @@ var MinesweeperStore = require('./stores/MinesweeperStore');
 var MinesweeperAPI = require('./apis/MinesweeperAPI');
 require('../style/base.css');
 
-if (!MinesweeperAPI.getRows()) {
-	MinesweeperAPI.setRows(RowBuilder(4));
+var rows = MinesweeperAPI.getRows();
+if (!rows || rows.length == 0) {
+	rows = RowBuilder(4);
 }
+MinesweeperAPI.setRows(rows);
 
+var state = MinesweeperStore.getState();
 React.renderComponent(
-  <Board rows={MinesweeperAPI.getRows()} />,
+  <Board rows={state.rows} isWon={state.isWon} isLost={state.isLost} />,
   document.getElementById('minesweeper')
 );

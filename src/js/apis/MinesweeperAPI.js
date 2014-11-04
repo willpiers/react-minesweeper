@@ -13,7 +13,6 @@ module.exports = {
     this.clickNeighbors(rows, cell);
 
     this.setRows(rows);
-    BoardServerActionCreators.receiveRows(rows);
   },
 
   toggleFlagged: function(location) {
@@ -22,7 +21,6 @@ module.exports = {
     cell.isFlagged = !cell.isFlagged;
 
     this.setRows(rows);
-    BoardServerActionCreators.receiveRows(rows);
   },
 
   clickNeighbors: function(rows, cell) {
@@ -46,14 +44,14 @@ module.exports = {
   resetRows: function(size) {
     var newRows = RowBuilder(size);
     this.setRows(newRows);
-    BoardServerActionCreators.receiveRows(newRows);
   },
 
   getRows: function() {
-    return JSON.parse(localStorage.getItem('rows'));
+    return JSON.parse(localStorage.getItem('rows')) || [];
   },
 
   setRows: function(rows) {
     localStorage.setItem('rows', JSON.stringify(rows));
+    BoardServerActionCreators.receiveRows(rows);
   }
 };

@@ -1,14 +1,29 @@
+@font-face {
+  font-family: 'digital-readout';
+  src: url('../fonts/digital-readout.medium.ttf') format('truetype');
+}
+
 #minesweeper {
 	text-align: center;
+	margin: auto;
+	background-color: rgb(188,188,188);
+	border: 5px solid #585858;
+	border-radius: 5px;
+	padding: 5px;
 }
 h3 {
 	font-family: monospace;
 	font-weight: 200;
-	font-size: 20px;
+	font-size: 25px;
+	margin: 5px 0px;
+	float: left;
+	color: white;
+	padding-left: 3px;
 }
 table {
-	border-spacing: 3px;
+	border-spacing: 1px;
 	margin: auto;
+	clear: both;
 }
 td {
 	box-sizing: border-box;
@@ -25,7 +40,7 @@ td.unclicked:hover {
 	border: 2px solid #888;
 }
 td.clicked {
-	/*border: 2px solid lightgray;*/
+	border: 2px solid rgb(187,187,187);
 	background: #eee;
 	padding: 0px;
 }
@@ -39,11 +54,23 @@ td.bomb {
 	background-repeat: no-repeat;
 }
 td.flagged {
-	background-color: red;
+	background-image: url('../images/flag.png');
+	background-position: center;
+	background-repeat: no-repeat;
 }
 .game-lost {
 	color: red;
 }
 .game-won {
 	color: limegreen;
+}
+.timer {
+	display: inline-block;
+	float: right;
+	font-family: 'digital-readout';
+	font-size: 40px;
+	color: red;
+	padding: 5px 5px 0px 0px;
+	letter-spacing: 3px;
+	margin: 5px auto;
 }

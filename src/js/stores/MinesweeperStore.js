@@ -20,6 +20,13 @@ function isWon(rows) {
     });
   });
 }
+function isFreshBoard(rows) {
+  return _.all(rows, function(row) {
+    return _.all(row, function(cell) {
+      return !cell.isClicked;
+    });
+  });
+}
 
 var MinesweeperStore = merge(EventEmitter.prototype, {
   emitChange: function() {
@@ -33,7 +40,8 @@ var MinesweeperStore = merge(EventEmitter.prototype, {
     return {
       rows: _rows,
       isWon: isWon(_rows),
-      isLost: isLost(_rows)
+      isLost: isLost(_rows),
+      isFreshBoard: isFreshBoard(_rows)
     }
   },
   addChangeListener: function(callback) {

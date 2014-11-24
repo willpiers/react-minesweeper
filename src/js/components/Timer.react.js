@@ -3,17 +3,39 @@ var _ = require('lodash');
 var React = require('react/addons');
 
 var Timer = React.createClass({
+
 	getInitialState: function() {
+		var secs = JSON.parse(localStorage.getItem('secs'));
 		return {
-			seconds: 0
+			seconds: secs ? secs : 0,
+			timerId: this.newInterval()
 		};
 	},
-	render: function() {
-		return <span>{this.state.seconds}</span>;
+	componentWillMount: function(hello) {
+		if (!this.props.isRunning) {
+			clearInterval(this.state.timerId);
+			localStorage.setItem('secs', 0);
+		}
 	},
-	componentDidMount: function() {
+	componentWillReceiveProps: function(nextProps) {
+		if (!nextProps.isRunning) {
+			clearInterval(this.state.timerId);
+			localStorage.setItem('secs', 0);
+		}
+		if (nextProps.isRunning && !this.props.isRunning) {
+			this.setState({
+				seconds: 0,
+				timerId: this.newInterval()
+			});
+		}
+	},
+	render: function() {
+		return <span className='timer'>{this.state.seconds}</span>;
+	},
+	newInterval: function() {
 		var me = this;
-		setInterval(function() {
+		return setInterval(function() {
+			localStorage.setItem('secs', me.state.seconds + 1);
 			me.setState({
 				seconds: me.state.seconds + 1
 			})

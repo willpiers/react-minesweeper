@@ -23,9 +23,12 @@ var Board = React.createClass({
       'game-lost': this.state.isLost,
       'game-won': this.state.isWon
     });
+    var storeState = MinesweeperStore.getState();
+    var isRunning = !storeState.isLost && !storeState.isWon && !storeState.isFreshBoard;
     return (
       <div>
         <h3 onClick={this.reset} className={classes}>Minesweeper</h3>
+        <Timer isRunning={isRunning} />
         <table>
           <tbody>
             {this.getRows()}
@@ -65,6 +68,9 @@ var Board = React.createClass({
       rows: state.rows,
       isLost: state.isLost,
       isWon: state.isWon
+    }, function() {
+      var board = this.getDOMNode().parentNode;
+      board.style.width = (this.state.rows.length * 31 + 1).toString() + "px";
     });
   },
   cellClicked: function(location) {

@@ -19,7 +19,7 @@ module.exports = {
       	loader: 'style-loader!css-loader'
       },
       {
-        test: /\.gif$/,
+        test: /\.(gif|png|ttf)$/,
         loader: 'url-loader?limit=100000&mimetype=image/gif'
       }
     ]

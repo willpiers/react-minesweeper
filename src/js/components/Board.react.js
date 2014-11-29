@@ -25,10 +25,16 @@ var Board = React.createClass({
     });
     var storeState = MinesweeperStore.getState();
     var isRunning = !storeState.isLost && !storeState.isWon && !storeState.isFreshBoard;
+    var cells = _.flatten(this.state.rows);
+    var totalBombs = _.filter(cells, function(c) { return c.isBomb }).length;
+    var totalFlags = _.filter(cells, function(c) { return c.isFlagged }).length;
     return (
       <div>
-        <h3 onClick={this.reset} className={classes}>Minesweeper</h3>
-        <Timer isRunning={isRunning} />
+        <div id='inline-elements'>
+          <span className="bombs-remaining digital">{totalBombs - totalFlags}</span>
+          <h3 onClick={this.reset} className={classes}>Sweeper</h3>
+          <Timer isRunning={isRunning} />
+        </div>
         <table>
           <tbody>
             {this.getRows()}

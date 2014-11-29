@@ -1,7 +1,12 @@
 /** @jsx React.DOM */
 var React = require('react');
+var colors = ['#ff00ff','#00ffff','#00ff00','#ffff00','#ff0000','#0000ff'];
 
 var Cell = React.createClass({
+  shouldComponentUpdate: function(nextProps, nextState) {
+    return nextProps.isClicked !== this.props.isClicked || nextProps.isFlagged !== this.props.isFlagged;
+  },
+
   render: function() {
     var classes = React.addons.classSet({
       bomb: this.props.isBomb && this.props.isClicked,
@@ -9,10 +14,13 @@ var Cell = React.createClass({
       unclicked: !this.props.isClicked,
       flagged: this.props.isFlagged
     });
+    var randomColor = colors[Math.floor(Math.random()*colors.length)];
+    var flaggedStyle = {"background-color": this.props.isFlagged ? randomColor : '#444'};
     return this.props.isClicked ?
       <td className={classes}>{this.getClickedMarkup()}</td> :
       <td className={classes} onClick={this.propagateClick}
-                              onContextMenu={this.propagateRightClick}>
+                              onContextMenu={this.propagateRightClick}
+                              style={flaggedStyle}>
           {this.getUnclickedMarkup()}
       </td>;
   },

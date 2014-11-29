@@ -30,7 +30,7 @@ var Timer = React.createClass({
 		}
 	},
 	render: function() {
-		return <span className='timer'>{this.state.seconds}</span>;
+		return <span className='timer digital'>{this.state.seconds}</span>;
 	},
 	newInterval: function() {
 		var me = this;

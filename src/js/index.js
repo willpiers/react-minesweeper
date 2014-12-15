@@ -4,7 +4,7 @@ var Board = require('./components/Board.react');
 var RowBuilder = require('./lib/RowBuilder');
 var MinesweeperStore = require('./stores/MinesweeperStore');
 var MinesweeperAPI = require('./apis/MinesweeperAPI');
-require('../style/base.css');
+require('../style/base.less');
 
 var rows = MinesweeperAPI.getRows();
 if (!rows || rows.length == 0) {

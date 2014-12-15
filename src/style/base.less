@@ -1,0 +1,93 @@
+@font-face {
+  font-family: 'digital-readout';
+  src: url('../fonts/digital-readout.medium.ttf') format('truetype');
+}
+
+#minesweeper {
+	text-align: center;
+	margin: auto;
+	background-color: rgb(188,188,188);
+	border: 5px solid #585858;
+	border-radius: 5px;
+	padding: 5px;
+
+	h3 {
+		font-family: monospace;
+		color: white;
+		margin: 0px;
+		display: inline;
+		font-weight: 100;
+		line-height: 1em;
+	}
+	table {
+		border-spacing: 1px;
+		margin: auto;
+		clear: both;
+	}
+	td {
+		box-sizing: border-box;
+		border-radius: 5px;
+		width: 30px;
+		height: 30px;
+
+		&.clicked {
+			border: 2px solid rgb(187,187,187);
+			background: #eee;
+			padding: 0px;
+
+			span {
+				font-family: 'courier';
+				font-weight: bold;
+			}
+		}
+
+		&.unclicked {
+			border: 2px solid #bbb;
+			padding: 10px;
+			background: #ddd;
+
+			&:hover {
+				border: 2px solid #888;
+			}
+		}
+
+		&.bomb {
+			background-image: url('../images/mine.gif');
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+
+		&.flagged {
+			background-image: url('../images/flag.png');
+			background-position: center;
+			background-repeat: no-repeat;
+		}
+	}
+	.game-lost {
+		color: red;
+	}
+	.game-won {
+		color: limegreen;
+	}
+	.digital {
+		font-family: 'digital-readout';
+		font-size: 25px;
+		color: red;
+		letter-spacing: 3px;
+	}
+	.timer {
+		display: inline;
+		position: absolute;
+		right: 0px;
+		padding-right: 5px;
+	}
+	.bombs-remaining {
+		position: absolute;
+		left: 0px;
+		padding-left: 5px;
+	}
+	#inline-elements {
+		position: relative;
+		margin-bottom: 3px;
+	}
+}

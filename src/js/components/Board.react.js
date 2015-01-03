@@ -30,7 +30,7 @@ var Board = React.createClass({
     var totalFlags = _.filter(cells, function(c) { return c.isFlagged }).length;
     return (
       <div>
-        <div id='inline-elements'>
+        <div id='header'>
           <span className="bombs-remaining digital">{totalBombs - totalFlags}</span>
           <h3 onClick={this.reset} className={classes}>Sweeper</h3>
           <Timer isRunning={isRunning} />
@@ -40,8 +40,20 @@ var Board = React.createClass({
             {this.getRows()}
           </tbody>
         </table>
+        <div id='footer'>
+          <form onSubmit={this.showHelp}>
+            <button id='help-btn'>Halp!</button>
+          </form>
+          <a target='_blank' href='http://github.com/willpiers/react-minesweeper'>
+            <img id='github-logo' src='src/images/github.png'/>
+          </a>
+        </div>
       </div>
     );
+  },
+  showHelp: function(e) {
+    e.preventDefault();
+    alert("The purpose of the game is to open all the cells of the board which do not contain a bomb.\n\nYou lose if you set off a bomb cell.\n\nEvery non-bomb cell you open will tell you the total number of bombs in the eight neighboring cells.\n\nOnce you are sure that a cell contains a bomb, you can right-click to put a flag it on it as a reminder.\n\nOnce you have flagged all the bombs around an open cell, you can quickly open the remaining non-bomb cells by shift-clicking on the cell.\n\nTo start a new game (abandoning the current one), just click on the text that says 'Sweeper' at the top.\n\n\nHappy mine hunting!");
   },
   getRows: function() {
     var me = this;

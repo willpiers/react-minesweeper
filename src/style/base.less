@@ -9,7 +9,7 @@
 	background-color: rgb(188,188,188);
 	border: 5px solid #585858;
 	border-radius: 5px;
-	padding: 5px;
+	padding: 5px 5px 0 5px;
 
 	h3 {
 		font-family: monospace;
@@ -86,8 +86,34 @@
 		left: 0px;
 		padding-left: 5px;
 	}
-	#inline-elements {
+	#header {
 		position: relative;
 		margin-bottom: 3px;
+	}
+	#footer {
+		position: relative;
+		box-sizing: border-box;
+		height: 20px;
+		margin: 3px;
+
+		form {
+			position: absolute;
+			left: 0;
+
+			#help-btn {
+				height: 100%;
+			}
+		}
+
+		a {
+			position: absolute;
+			right: 0;
+			height: 100%;
+
+			#github-logo {
+				height: 100%;
+				padding-left: 7px;
+			}
+		}
 	}
 }

@@ -1,6 +1,7 @@
 /** @jsx React.DOM */
 var _ = require('lodash');
 var React = require('react/addons');
+var fastclick = require('fastclick');
 var Cell = require('./Cell.react');
 var Timer = require('./Timer.react');
 var CellActionCreators = require('../actions/CellActionCreators');
@@ -16,6 +17,7 @@ var Board = React.createClass({
     };
   },
   componentDidMount: function() {
+    fastclick.attach(document.body);
     MinesweeperStore.addChangeListener(this._onChange, this);
   },
   render: function() {

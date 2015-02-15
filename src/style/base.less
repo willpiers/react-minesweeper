@@ -3,6 +3,9 @@
   src: url('../fonts/digital-readout.medium.ttf') format('truetype');
 }
 
+button {
+	cursor: pointer;
+}
 #minesweeper {
 	text-align: center;
 	margin: auto;
@@ -88,7 +91,26 @@
 	}
 	#header {
 		position: relative;
-		margin-bottom: 3px;
+
+		.title {
+			cursor: pointer;
+		}
+
+		.size-control {
+			display: inline-block;
+			width: 15px;
+			height: 15px;
+			line-height: 17px;
+			margin: 0 10px;
+			background: #444;
+			border: 1px solid #bbb;
+			border-radius: 50%;
+			cursor: pointer;
+
+			&:hover {
+				border: 1px solid #888;
+			}
+		}
 	}
 	#footer {
 		position: relative;

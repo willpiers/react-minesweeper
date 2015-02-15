@@ -42,6 +42,11 @@ module.exports = {
   },
 
   resetRows: function(size) {
+    if (size < 7) {
+      size = 7;
+    } else if (size > 25) {
+      size = 25;
+    }
     var newRows = RowBuilder(size);
     this.setRows(newRows);
   },

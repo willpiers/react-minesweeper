@@ -21,7 +21,8 @@ var Board = React.createClass({
   render: function() {
     var classes = React.addons.classSet({
       'game-lost': this.state.isLost,
-      'game-won': this.state.isWon
+      'game-won': this.state.isWon,
+      'title': true
     });
     var storeState = MinesweeperStore.getState();
     var isRunning = !storeState.isLost && !storeState.isWon && !storeState.isFreshBoard;
@@ -32,7 +33,11 @@ var Board = React.createClass({
       <div>
         <div id='header'>
           <span className="bombs-remaining digital">{totalBombs - totalFlags}</span>
-          <h3 onClick={this.reset} className={classes}>Sweeper</h3>
+          <h3>
+            <span onClick={this.resetSmaller} className='size-control'>-</span>
+            <span onClick={this.reset} title='Reset' className={classes}>Sweeper</span>
+            <span onClick={this.resetBigger} className='size-control'>+</span>
+          </h3>
           <Timer isRunning={isRunning} />
         </div>
         <table>
@@ -53,7 +58,7 @@ var Board = React.createClass({
   },
   showHelp: function(e) {
     e.preventDefault();
-    alert("The purpose of the game is to open all the cells of the board which do not contain a bomb.\n\nYou lose if you set off a bomb cell.\n\nEvery non-bomb cell you open will tell you the total number of bombs in the eight neighboring cells.\n\nOnce you are sure that a cell contains a bomb, you can right-click to put a flag it on it as a reminder.\n\nOnce you have flagged all the bombs around an open cell, you can quickly open the remaining non-bomb cells by shift-clicking on the cell.\n\nTo start a new game (abandoning the current one), just click on the text that says 'Sweeper' at the top.\n\n\nHappy mine hunting!");
+    alert("The purpose of the game is to open all the cells of the board which do not contain a bomb.\n\nYou lose if you set off a bomb cell.\n\nEvery non-bomb cell you open will tell you the total number of bombs in the eight neighboring cells.\n\nOnce you are sure that a cell contains a bomb, you can right-click to put a flag it on it as a reminder.\n\nTo start a new game (abandoning the current one), just click on the text that says 'Sweeper' at the top.\n\nUse the \"+\" and \"-\" buttons to change the size of the board.\n\n\nHappy mine hunting!");
   },
   getRows: function() {
     var me = this;
@@ -97,8 +102,17 @@ var Board = React.createClass({
   cellRightClicked: function(location) {
     CellActionCreators.receiveRightClick(location);
   },
-  reset: function() {
+  reset: function(e) {
+    e.preventDefault();
     BoardActionCreators.receiveReset(this.state.rows.length);
+  },
+  resetBigger: function(e) {
+    e.preventDefault();
+    BoardActionCreators.receiveReset(this.state.rows.length + 1);
+  },
+  resetSmaller: function(e) {
+    e.preventDefault();
+    BoardActionCreators.receiveReset(this.state.rows.length - 1);
   }
 });
 
